@@ -1,0 +1,61 @@
+\documentclass[a4paper]{amsart}
+\usepackage[pdftex]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{courier}
+\usepackage{fancyhdr}
+
+\lstset{language=C++}
+\lstset{columns=fullflexible}
+\lstset{basicstyle=\scriptsize\ttfamily}
+\lstset{showspaces=false}
+
+\geometry{landscape,left=2cm,right=2cm,top=2cm,bottom=2cm}
+\setlength{\topmargin}{-0.75in}
+\setlength{\oddsidemargin}{-0.125in}
+\setlength{\evensidemargin}{-0.125in}
+\setlength{\columnsep}{1in}
+\setlength{\columnseprule}{0.2pt}
+\textwidth 10in
+
+\pagestyle{fancy}
+\lhead{Floydini}
+\chead{}
+\rhead{\thepage}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\newcommand{\includecpp}[3]{
+%	\begin{multicols}{2}
+		\subsection{#1}\
+		\lstinputlisting[language=c++]{#2/#3}
+%	\end{multicols}
+}
+
+\newcommand{\stirlingfirst}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}}
+\newcommand{\stirlingsecond}[2]{\genfrac{\{}{\}}{0pt}{}{#1}{#2}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+
+\begin{document}
+	\thispagestyle{fancy}
+	\begin{center}
+		\Huge\textsc{ACM-template 2018}
+		\vspace{0.35cm}
+		\huge NanJing University - Floydini
+		\vspace{0.35cm}
+	\end{center}
+	\begin{multicols}{2}
+		\tableofcontents
+	\end{multicols}
+\newpage
+	\begin{multicols}{2}
+    \newpage
+	\section{math facts}
+    \input{math_facts}
+	\end{multicols}
+\end{document}
