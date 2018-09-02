@@ -1,5 +1,4 @@
-*
-!*.cpp
-!*.cc
-!*.tex
-!*.pdf
+ACM_template.aux
+ACM_template.log
+ACM_template.toc
+ACM_template.dvi
