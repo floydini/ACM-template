@@ -12,7 +12,7 @@ void rsort() {
 	for(int i = n; i >= 1; i--) sa[c[rk[r[i]]]--] = r[i];
 }
 void suffix() {
-	//sa
+	//SA
 	for(int i = 1; i <= n; i++) rk[i] = a[i], r[i] = i;
 	rsort();
 	for(int w = 1, p = 1, i; p < n; w <<= 1, m = p) {
@@ -22,7 +22,7 @@ void suffix() {
 		rsort(), swap(rk, r), rk[sa[1]] = p = 1;
 		for(i = 2; i <= n; i++) rk[sa[i]] = cmp(r, sa[i], sa[i - 1], w) ? p : ++p;
 	}
-	//lcp
+	//height
 	int j, k = 0;
 	for(int i = 1; i <= n; h[rk[i++]] = k)
 		for(k = k ? k - 1 : k, j = sa[rk[i] - 1]; a[i + k] == a[j + k]; ++k);
