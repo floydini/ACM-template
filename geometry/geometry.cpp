@@ -15,14 +15,18 @@ Vector operator+(Vector A, Vector B) { return Vector(A.x + B.x, A.y + B.y); }
 Vector operator-(Vector A, Vector B) { return Vector(A.x - B.x, A.y - B.y); }
 Vector operator*(Vector A, double p) { return Vector(A.x * p, A.y * p); }
 Vector operator/(Vector A, double p) { return Vector(A.x / p, A.y / p); }
-bool operator<(const Point &a, const Point &b) { return a.x < b.x || (a.x == b.x && a.y < b.y); }
+bool operator<(const Point &a, const Point &b) {
+	return a.x < b.x || (a.x == b.x && a.y < b.y);
+}
 
 int dcmp(double x) {
 	if(fabs(x) < EPS) return 0;
 	else return x < 0 ? -1 : 1;
 }
 
-bool operator == (const Point &a, const Point &b) { return dcmp(a.x - b.x) == 0 && dcmp(a.y - b.y); }
+bool operator == (const Point &a, const Point &b) {
+	return dcmp(a.x - b.x) == 0 && dcmp(a.y - b.y);
+}
 
 //向量a的极角
 double Angle(const Vector& v) { return atan2(v.y, v.x); }
@@ -34,17 +38,22 @@ double Dot(Vector A, Vector B) { return A.x * B.x + A.y * B.y; }
 double Length(Vector A) { return sqrt(Dot(A, A)); }
 
 //向量夹角
-double Angle(Vector A, Vector B) { return acos(Dot(A, B) / Length(A) / Length(B)); }
+double Angle(Vector A, Vector B) {
+	return acos(Dot(A, B) / Length(A) / Length(B));
+}
 
 //向量叉积
 double Cross(Vector A, Vector B) { return A.x * B.y - A.y * B.x; }
 
 //三角形有向面积的二倍
-double Area2(Point A, Point B, Point C) { return Cross(B - A, C - A); }
+double Area2(Point A, Point B, Point C) {
+	return Cross(B - A, C - A);
+}
 
 //向量逆时针旋转rad度(弧度)
 Vector Rotate(Vector A, double rad) {
-	return Vector(A.x * cos(rad) - A.y * sin(rad), A.x * sin(rad) + A.y * cos(rad));
+	return Vector(A.x * cos(rad) - A.y * sin(rad),
+				  A.x * sin(rad) + A.y * cos(rad));
 }
 
 //计算向量A的单位法向量。左转90°，把长度归一。调用前确保A不是零向量。
@@ -108,7 +117,8 @@ bool SegmentProperIntersection(Point a1, Point a2, Point b1, Point b2) {
 
 //判断点是否在点段上，不包含端点
 bool OnSegment(Point P, Point a1, Point a2) {
-	return dcmp(Cross(a1 - P, a2 - P) == 0 && dcmp((Dot(a1 - P, a2 - P)) < 0));
+	return dcmp(Cross(a1 - P, a2 - P) == 0 &&
+				dcmp((Dot(a1 - P, a2 - P)) < 0));
 }
 
 //计算凸多边形面积
@@ -154,9 +164,12 @@ struct Line {
 
 //直线和圆的交点，返回交点个数，结果存在sol中。
 //该代码没有清空sol。
-int getLineCircleIntersecion(Line L, Circle C, double& t1, double& t2, vector<Point>& sol) {
+int getLineCircleIntersecion(Line L, Circle C, double& t1, double& t2,
+							 vector<Point>& sol) {
 	double a = L.v.x, b = L.p.x - C.c.x, c = L.v.y, d = L.p.y - C.c.y;
-	double e = a * a + c * c, f = 2 * (a * b + c * d), g = b * b + d * d - C.r * C.r;
+	double e = a * a + c * c,
+		   f = 2 * (a * b + c * d),
+		   g = b * b + d * d - C.r * C.r;
 	double delta = f * f - 4 * e * g;
 	if(dcmp(delta) < 0) return 0; //相离
 	if(dcmp(delta) == 0) {        //相切
@@ -215,7 +228,8 @@ int getTangents(Circle A, Circle B, Point *a, Point *b) {
 	if(A.r < B.r) {
 		swap(A, B); swap(a, b);
 	}
-	int d2 = (A.c.x - B.c.x) * (A.c.x - B.c.x) + (A.c.y - B.c.y) * (A.c.y - B.c.y);
+	int d2 = (A.c.x - B.c.x) * (A.c.x - B.c.x) +
+			 (A.c.y - B.c.y) * (A.c.y - B.c.y);
 	int rdiff = A.r - B.r;
 	int rsum = A.r + B.r;
 	if(d2 < rdiff * rdiff) return 0; //内含
@@ -237,8 +251,11 @@ int getTangents(Circle A, Circle B, Point *a, Point *b) {
 		cnt++;
 	} else if(d2 > rsum * rsum) { //两条公切线
 		double ang = acos((A.r + B.r) / sqrt(d2));
-		a[cnt] = A.point(base + ang); b[cnt] = B.point(PI + base + ang); cnt++;
-		a[cnt] = A.point(base - ang); b[cnt] = B.point(PI + base - ang); cnt++;
+		a[cnt] = A.point(base + ang);
+		b[cnt] = B.point(PI + base + ang); cnt++;
+
+		a[cnt] = A.point(base - ang);
+		b[cnt] = B.point(PI + base - ang); cnt++;
 	}
 	return cnt;
 }

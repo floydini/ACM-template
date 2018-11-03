@@ -6,7 +6,9 @@ struct Cp {
 };
 Cp operator + (Cp &x, Cp &y) { return Cp(x.r + y.r, x.i + y.i); }
 Cp operator - (Cp &x, Cp &y) { return Cp(x.r - y.r, x.i - y.i); }
-Cp operator * (Cp &x, Cp &y) { return Cp(x.r * y.r - x.i * y.i, x.r * y.i + x.i * y.r); }
+Cp operator * (Cp &x, Cp &y) {
+	return Cp(x.r * y.r - x.i * y.i, x.r * y.i + x.i * y.r);
+}
 
 void change(Cp y[], int len) {
 	int t = len >> 1;
@@ -37,7 +39,8 @@ void fft(Cp y[], int len, int on) {
 }
 
 // len = 2*\lceil n \rceil
-// the result is in y1
+// result is in y1
+// y2 will be destructed
 void sol(Cp y1[], Cp y2[], int len) {
 	fft(y1, len, 1);
 	if(y1 != y2) fft(y2, len, 1);

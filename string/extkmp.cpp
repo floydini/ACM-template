@@ -1,6 +1,6 @@
 // S,T start from 0
-// f[i]: T[i,f[i]) match T[0,f[i]-i)
-// g[i]: S[i,g[i]) match T[0,g[i]-i)
+// f[i]: T[i,f[i]+i) match T[0,f[i])
+// g[i]: S[i,g[i]+i) match T[0,g[i])
 int f[N], g[N];
 void extkmp(char *S, char *T) {
 	int a = strlen(S), b = strlen(T);
@@ -17,7 +17,7 @@ void extkmp(char *S, char *T) {
 	for(int i = 1, l = 0, r = g[0]; i < a; i++) {
 		if(f[i - l] >= r - i) {
 			l = i, r = max(l, r);
-			while(r < b && S[r] == T[r - i]) r++;
+			while(r < a && S[r] == T[r - i]) r++;
 			g[i] = r - l;
 		} else g[i] = f[i - l];
 	}
